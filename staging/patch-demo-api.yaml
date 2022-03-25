@@ -1,0 +1,25 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: demo-api
+spec:
+  releaseName: demo-api
+  values:
+      deployment:
+        image: 
+          repository: "colinmac.azurecr.io/samples/simplegreeting"
+          pullPolicy: Always
+          tag: latest
+        env:
+          - name: GREETING
+            value: "Hello from Staging!"
+      ingress:
+        className: nginx-ingress-private
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /$2
+        hosts:
+        - host: "staging.colinmac.local"
+          paths:
+            - path: /demo(/|$)(.*)
+              pathType: Prefix
+              servicePort: 80

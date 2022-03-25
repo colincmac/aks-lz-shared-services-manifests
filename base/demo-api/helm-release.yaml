@@ -11,8 +11,7 @@ spec:
       # version: "" latest
       sourceRef:
         kind: GitRepository
-        name: shared-services
-        namespace: shared-services
+        name: shared-services-developers
   interval: 5m
   values:
       deployment:

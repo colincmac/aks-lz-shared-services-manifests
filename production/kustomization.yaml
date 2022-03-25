@@ -3,6 +3,8 @@ kind: Kustomization
 namespace: shared-services
 resources:
   - ../base
+commonLabels:
+  colinmac.dev/cost-center: "001"
 patches:
   - patch: |-
       - op: add
@@ -10,3 +12,5 @@ patches:
         value: shared-services
     target:
       kind: HelmRelease
+patchesStrategicMerge:
+  - patch-demo-api.yaml

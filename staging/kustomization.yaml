@@ -3,10 +3,9 @@ kind: Kustomization
 namespace: shared-services-staging
 resources:
   - ../base
-patches:
-  - patch: |-
-      - op: add
-        path: /spec/targetNamespace
-        value: shared-services-staging
-    target:
-      kind: HelmRelease
+commonLabels:
+  colinmac.dev/cost-center: "001"
+  colinmac.dev/business-impact: "Low"
+  colinmac.dev/revenue-impact: "Medium"
+patchesStrategicMerge:
+  - patch-demo-api.yaml
