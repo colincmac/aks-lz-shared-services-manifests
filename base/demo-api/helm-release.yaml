@@ -3,7 +3,7 @@ kind: HelmRelease
 metadata:
   name: demo-api
 spec:
-  serviceAccountName: shared-services-team
+  serviceAccountName: shared-services-developers
   releaseName: demo-api
   chart:
     spec:
