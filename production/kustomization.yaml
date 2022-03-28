@@ -5,12 +5,5 @@ resources:
   - ../base
 commonLabels:
   colinmac.dev/cost-center: "001"
-patches:
-  - patch: |-
-      - op: add
-        path: /spec/targetNamespace
-        value: shared-services
-    target:
-      kind: HelmRelease
 patchesStrategicMerge:
   - patch-demo-api.yaml

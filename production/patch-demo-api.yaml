@@ -23,3 +23,9 @@ spec:
             - path: /demo(/|$)(.*)
               pathType: Prefix
               servicePort: 80
+      osm:
+        enabled: true
+        proxySslSecret: "core-platform/osm-private-nginx-client-cert"
+        ingressNamespace: core-platform
+        ingressService: ingress-nginx-private-controller
+        ingressServiceAccount: ingress-nginx-private

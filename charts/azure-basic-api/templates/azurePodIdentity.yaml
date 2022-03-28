@@ -1,6 +1,6 @@
 {{- if .Values.azureIdentity.enabled }}
 # TODO: Allow reuse of Identity & Binding by name override
-
+# this will eventually be replaced by the associated annotated service principal
 apiVersion: "aadpodidentity.k8s.io/v1"
 kind: AzureIdentity
 metadata:

@@ -50,3 +50,22 @@ app.kubernetes.io/name: {{ include "secure-api.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "secure-api.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create }}
+{{- default (include "secure-api.fullname" .) .Values.serviceAccount.name }}
+{{- else }}
+{{- default "default" .Values.serviceAccount.name }}
+{{- end }}
+{{- end }}
+
+{{/*
+Define the OSM mTLS proxy_ssl_name value.
+proxy_ssl_name for a service is of the form <service-account>.<namespace>.cluster.local
+*/}}
+{{- define "secure-api.proxySslName" -}}
+{{- $proxyPath := printf "%s.%s.cluster.local" (include "secure-api.serviceAccountName" .) .Release.Namespace -}}
+{{- print $proxyPath | trimSuffix "-" -}}
+{{- end }}

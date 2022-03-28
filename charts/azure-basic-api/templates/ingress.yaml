@@ -7,6 +7,14 @@ metadata:
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
+    {{- if $.Values.osm.enabled }}
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    # proxy_ssl_name for a service is of the form <service-account>.<namespace>.cluster.local
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_ssl_name "{{ include "secure-api.proxySslName" $ }}";
+    nginx.ingress.kubernetes.io/proxy-ssl-secret: {{ $.Values.osm.proxySslSecret }}
+    nginx.ingress.kubernetes.io/proxy-ssl-verify: "on"
+    {{- end }}
   {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
