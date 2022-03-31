@@ -19,14 +19,14 @@ spec:
           nginx.ingress.kubernetes.io/rewrite-target: /$2
           nginx.ingress.kubernetes.io/use-regex: "true"
         hosts:
-        - host: "staging.colinmac.local"
+        - host: "staging.colinmac.dev"
           paths:
             - path: /demo(/|$)(.*)
               pathType: Prefix
               servicePort: 80
         tls:
         - hosts:
-          - staging.colinmac.local
+          - staging.colinmac.dev
       osm:
         enabled: true
         proxySslSecret: "core-platform/osm-private-nginx-client-cert"

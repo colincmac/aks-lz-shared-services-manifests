@@ -100,5 +100,7 @@ tolerations: []
 
 affinity: {}
 
-networkPolicy:
+disruptionBudget:
+  enabled: false
+  minAvailable: 50%
   
